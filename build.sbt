@@ -13,3 +13,5 @@ libraryDependencies ++= Seq(
   ws,
   "mysql" % "mysql-connector-java" % "5.1.27"
 )
+
+libraryDependencies += "com.google.zxing" % "javase" % "3.1.0"
