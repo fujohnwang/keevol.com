@@ -1,5 +1,7 @@
 package controllers
 
+import java.net.URI
+
 import play.api.mvc._
 import play.api.libs.iteratee.Enumerator
 import com.google.zxing.qrcode.QRCodeWriter
@@ -18,7 +20,7 @@ object Application extends Controller {
       req.getQueryString("url") match {
         case None => Results.BadRequest
         case Some(url) => {
-          val bitMatrix = new QRCodeWriter().encode(url, BarcodeFormat.QR_CODE, 175, 175)
+          val bitMatrix = new QRCodeWriter().encode(new URI(url).toASCIIString, BarcodeFormat.QR_CODE, 175, 175)
           val outputStream = new ByteArrayOutputStream()
           MatrixToImageWriter.writeToStream(bitMatrix, "png", outputStream)
           Result(header = ResponseHeader(200, Map(CONTENT_TYPE -> "image/png")), body = Enumerator(outputStream.toByteArray))
