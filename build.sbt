@@ -1,3 +1,7 @@
+import com.typesafe.sbt.SbtNativePackager._
+import com.typesafe.sbt.packager.MappingsHelper._
+import NativePackagerKeys._
+
 name := """playapp"""
 
 version := "1.0-SNAPSHOT"
@@ -15,3 +19,5 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies += "com.google.zxing" % "javase" % "3.1.0"
+
+mappings in Universal ++= directory("agents")
